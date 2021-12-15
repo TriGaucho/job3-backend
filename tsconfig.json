@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "rootDir": "./src",
+      "outDir": "./dist",
+      "baseUrl": "./src",
+      "resolveJsonModule": true,
+      "sourceMap": true,
+      "typeRoots": [
+          "../node_modules/@types"
+      ],
+      "types": [
+          "node"
+      ]
+  },
+  "include": [        
+      "src/**/*"
+  ],
+  "exclude": [
+      "node_modules"
+  ]
+}
