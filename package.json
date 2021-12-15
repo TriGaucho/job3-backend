@@ -1,12 +1,11 @@
 {
   "name": "pedidojob3_backend",
   "version": "1.0.0",
-  "engines" : { 
-    "node" : "12.x" 
+  "engines": {
+    "node": "12.x"
   },
   "description": "",
   "main": "index.js",
-  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc -w",
@@ -19,6 +18,7 @@
     "@types/axios": "^0.14.0",
     "axios": "^0.24.0",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "http-status": "^1.5.0",
     "ts-node": "^10.4.0",
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.2",
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/http-status": "^1.1.2",
     "@types/node": "^16.11.12"
