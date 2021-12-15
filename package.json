@@ -1,4 +1,5 @@
 {
+  "engines" : { "node" : ">=0.12" } ,
   "name": "pedidojob3_backend",
   "version": "1.0.0",
   "description": "",
