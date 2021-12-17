@@ -1,5 +1,6 @@
 import * as express from 'express'
 import * as cors from 'cors'
+import * as bodyParser from 'body-parser'
 
 import App from './app'
 import * as Router from './routers'
@@ -14,6 +15,9 @@ server.use(cors({
     methods: "GET, OPTIONS, POST, PUT"
   })
 )
+
+server.use(bodyParser.json())
+server.use(bodyParser.urlencoded({ extended: true }))
 
 server.use('/', Router)
 
