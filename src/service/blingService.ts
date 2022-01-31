@@ -33,5 +33,18 @@ export default class BlingService {
             return error
         }
     }
+
+    static async getCliente(cpf): Promise<any> {
+        try {
+            const response = await axios.get(`${rotasBling.get.cliente}${cpf}/json/?apikey=${process.env.APIKEY}`)
+            return {
+                clienteNome: response.data.retorno.contatos[0].contato.nome,
+                clienteCpf: response.data.retorno.contatos[0].contato.cnpj,
+                clienteFone: response.data.retorno.contatos[0].contato.fone
+            }
+        } catch (error) {
+            return error
+        }
+    }
     
 }
