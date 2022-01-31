@@ -3,6 +3,6 @@ import BlingRouter from './router/blingRouter'
 
 const router = express.Router()
 
-router.use('/bling', BlingRouter)
+router.use('/api', BlingRouter)
 
 export = router
