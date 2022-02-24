@@ -14,8 +14,15 @@ export default class BlingController {
 
         if(result) return res.status(200).json(result)
     }
+
     static async getCliente(req: Request, res: Response): Promise<any> {
         const result = await BlingService.getCliente(req.params.id)
+
+        if(result) return res.status(200).json(result)
+    }
+
+    static async postProduto(req: Request, res: Response): Promise<any> {
+        const result = await BlingService.postPedido(req.body)
 
         if(result) return res.status(200).json(result)
     }

@@ -1,7 +1,9 @@
 import axios from 'axios'
 import FormData = require('form-data')
 
-import XmlFactory from './xmlFactory'
+import XmlFactory from '../factory/xmlFactory'
+import ProdutosFactory from '../factory/produtosFactory'
+
 require('dotenv').config()
 
 import rotasBling from '../configs/rotasBling'
@@ -10,7 +12,7 @@ export default class BlingService {
     static async getProdutos(): Promise<any> {
       try{
         const response = await axios.get(`${rotasBling.get.produtos}${process.env.APIKEY}`)
-        return response.data
+        return ProdutosFactory.objetoProdutos(response.data.retorno.produtos)
         }catch{
            throw {msd: 'erro'} 
         }
@@ -46,5 +48,19 @@ export default class BlingService {
             return error
         }
     }
-    
+
+    static async postProduto(xmlProduto) {
+        const data = new FormData()
+        data.append('apikey', process.env.APIKEY)
+        data.append('xml', xmlProduto)
+
+        try {
+            const response = await axios.post(rotasBling.post.produto, data, { 
+                headers: data.getHeaders()
+            })
+            return response.data
+        }catch (error) {
+            return error
+        }
+    }
 }
