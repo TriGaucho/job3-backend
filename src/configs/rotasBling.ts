@@ -1,7 +1,9 @@
 export default {
     get:{
         produtos: 'https://bling.com.br/Api/v2/produtos/json/?apikey=',
-        cliente: 'https://bling.com.br/Api/v2/contato/'
+        cliente: 'https://bling.com.br/Api/v2/contato/',
+        pedidos: 'https://bling.com.br/Api/v2/pedidos/json/?apikey=',
+        pedido: 'https://bling.com.br/Api/v2/pedido'
     },
     post: {
         produto: 'https://bling.com.br/Api/v2/produto/json/',
