@@ -4,6 +4,7 @@ export default {
         cliente: 'https://bling.com.br/Api/v2/contato/'
     },
     post: {
-        pedido: 'https://bling.com.br/Api/v2/pedido/json/'
+        produto: 'https://bling.com.br/Api/v2/produto/json/',
+        pedido: 'https://bling.com.br/Api/v2/pedido/json/',
     }
 }
