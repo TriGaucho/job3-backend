@@ -5,7 +5,7 @@ export default class PedidosFactory{
         ped.forEach(p => {
             pedidos.push({
                 numeroPedido: p.pedido.numero,
-                dataPedidoPedido: p.pedido.dataPedido,
+                dataPedido: p.pedido.data,
                 observacoesPedido: p.pedido.observacoes,
                 situacaoPedido: p.pedido.situacao,
                 nomeCliente: p.pedido.cliente.nome,
@@ -34,7 +34,7 @@ export default class PedidosFactory{
                 codigo: i.item.codigo,
                 descricao: i.item.descricao,
                 quantidade: i.item.quantidade,
-                valorUnidade: i.item.valorUnidade
+                valorUnidade: parseFloat(i.item.valorunidade)
             })
         })
 
