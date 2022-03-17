@@ -7,7 +7,8 @@ export default class ProdutosFactory {
                 codigo: i.produto.codigo,
                 descricao: i.produto.descricao,
                 unidade: i.produto.unidade,
-                preco: parseFloat(i.produto.preco)
+                preco: parseFloat(i.produto.preco),
+                situacao: i.produto.situacao
             })
         })
 
