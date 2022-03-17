@@ -10,9 +10,11 @@ require('dotenv').config()
 import rotasBling from '../configs/rotasBling'
 
 export default class BlingService {
-    static async getProdutos(): Promise<any> {
+    static async getProdutos(filtro): Promise<any> {
+        const situacao = filtro ? `filters=situacao[${filtro}]&` : ''
       try{
-        const response = await axios.get(`${rotasBling.get.produtos}${process.env.APIKEY}`)
+        const response = await axios.get(`${rotasBling.get.produtos}/?${situacao}apikey=${process.env.APIKEY}`)
+        console.log(`${rotasBling.get.produtos}/?apikey=${process.env.APIKEY}`)
             return ProdutosFactory.objetoProdutos(response.data.retorno.produtos)
         }catch{
            throw {msd: 'erro'} 

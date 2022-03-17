@@ -4,7 +4,7 @@ import BlingService from '../service/blingService'
 
 export default class BlingController {
     static async getProdutos(req: Request, res: Response): Promise<any> {
-        const result = await BlingService.getProdutos()
+        const result = await BlingService.getProdutos(req.query.situacao)
 
         if(result) return res.status(200).json(result)
     }
