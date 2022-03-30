@@ -8,3 +8,6 @@
 
 **Login Heroku:**   
 `heroku login`
+
+PS
+Configurar arquivo .env com APIKEY.
