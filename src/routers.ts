@@ -1,8 +1,8 @@
 import * as express from 'express'
-import BlingRouter from './router/blingRouter'
+import ProdutosRouter from './produtos/produtos.router'
 
 const router = express.Router()
 
-router.use('/api', BlingRouter)
+router.use('/produtos', ProdutosRouter)
 
 export = router

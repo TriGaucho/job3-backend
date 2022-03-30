@@ -39,5 +39,14 @@ export default class XmlFactroy {
         `
 
         return dados
-    } 
+    }
+
+    static async xmlAtivaInativaProduto(situacao) {
+         return `
+            <?xml version="1.0" encoding="UTF-8"?>
+            <produto>
+                <situacao>${situacao}</situacao>
+            </produto>
+        `
+    }
 }

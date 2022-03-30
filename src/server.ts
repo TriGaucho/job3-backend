@@ -19,7 +19,7 @@ server.use(cors({
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: true }))
 
-server.use('/', Router)
+server.use('/api', Router)
 
 server.listen(port, () => {
   console.info(`Aplicação carregada na porta ${port}`)

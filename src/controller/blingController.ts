@@ -10,7 +10,8 @@ export default class BlingController {
     }
 
     static async postProduto(req: Request, res: Response): Promise<any> {
-        const result = await BlingService.postPedido(req.body)
+        
+        const result = await BlingService.putProduto(req.params.codigo, req.params.situacao)
 
         if(result) return res.status(200).json(result)
     }

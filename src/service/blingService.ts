@@ -2,7 +2,7 @@ import axios from 'axios'
 import FormData = require('form-data')
 
 import XmlFactory from '../factory/xmlFactory'
-import ProdutosFactory from '../factory/produtosFactory'
+import ProdutosFactory from '../produtos/produtos.factory'
 import PedidosFactory from '../factory/pedidosFactory'
 
 require('dotenv').config()
@@ -12,8 +12,9 @@ import rotasBling from '../configs/rotasBling'
 export default class BlingService {
     static async getProdutos(filtro): Promise<any> {
         const situacao = filtro ? `filters=situacao[${filtro}]&` : ''
+        const api = `${rotasBling.urlAPI}/produtos/json`
       try{
-        const response = await axios.get(`${rotasBling.get.produtos}/?${situacao}apikey=${process.env.APIKEY}`)
+        const response = await axios.get(`${api}/?${situacao}apikey=${process.env.APIKEY}`)
         console.log(`${rotasBling.get.produtos}/?apikey=${process.env.APIKEY}`)
             return ProdutosFactory.objetoProdutos(response.data.retorno.produtos)
         }catch{
@@ -89,5 +90,26 @@ export default class BlingService {
         } catch (error) {
             
         }
+    }
+
+    static async putProduto(produto, situacao) {
+        const prdutoXml = await XmlFactory.xmlAtivaInativaProduto(situacao)
+
+        const data = new FormData()
+        const api = `${rotasBling.urlAPI}produto/${produto}/json`
+        
+        data.append('apikey', process.env.APIKEY)
+        data.append('xml', prdutoXml)
+        
+        try {
+            const response = await axios.post(api, data, { 
+                headers: data.getHeaders()
+            })
+            if(response.data.retorno.erros) return { msg: response.data.retorno.erros }
+            return response.data
+        }catch (error) {
+            return error
+        }
+        
     }
 }
