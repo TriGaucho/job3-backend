@@ -4,6 +4,9 @@ import ProdutosController from './produtos.controller'
 
 const router = express.Router()
 
-router.get('/', ProdutosController.getProdutos)
+router.route('/').get(ProdutosController.getProdutos)
+router.route('/situacao').post(ProdutosController.postAtualizaProduto)
+router.route('/ativos').get(ProdutosController.getProdutosAtivos)
+router.route('/inativos').get(ProdutosController.getProdutosInativos)
 
 export default router

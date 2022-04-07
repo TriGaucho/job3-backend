@@ -1,8 +1,8 @@
 import * as express from 'express'
 import ProdutosRouter from './produtos/produtos.router'
 
-const router = express.Router()
+const routers = express.Router()
 
-router.use('produtos', ProdutosRouter)
+routers.use('/produtos', ProdutosRouter)
 
-export = router
+export default routers
