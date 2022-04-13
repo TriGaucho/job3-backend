@@ -37,5 +37,9 @@ export default class BlingController {
         if(result) return res.status(200).json(result)
     }
 
+    static async putAtivaInativaProduto(req: Request, res: Response): Promise<any> {
+        const result = await BlingService.atualizaSituacao(req.body.codigo, req.body.situacao)
 
+        if(result) return res.status(200).json(result)
+    }
 }

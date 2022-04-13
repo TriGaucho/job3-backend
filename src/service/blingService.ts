@@ -90,4 +90,26 @@ export default class BlingService {
             
         }
     }
+
+    static async atualizaSituacao(codigo, situacao){
+        const data = new FormData()
+
+        data.append('apikey', process.env.APIKEY)
+        data.append('xml', `<?xml version="1.0" encoding="UTF-8"?><produto><situacao>${situacao}</situacao></produto>`)
+
+        const rota = `${rotasBling.base}/produto/${codigo}/json/`
+        console.log(`ProdutosService - postAtualizaProduto: rota: ${rota}`)
+
+        const response = await axios.post(rota, data, { 
+            headers: data.getHeaders()
+        })
+        console.log(response)
+
+        const produto = await ProdutosFactory.objetoProdutos(response.data.retorno.produtos)
+        return produto
+    }
+
+    static async produtosInativos() {
+        
+    }
 }
