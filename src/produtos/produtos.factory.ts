@@ -15,7 +15,7 @@ export default class ProdutosFactory {
         return produtos
     }
 
-    static async montaXmlProduto(dado) {
+    static async montaXmlProduto(dado: string) {
         return `
             <?xml version="1.0" encoding="UTF-8"?>
             <produto>

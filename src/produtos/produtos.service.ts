@@ -10,12 +10,14 @@ class ProdutosService {
     async getProdutos() {
         const produtosAtivos = await this.getProdutosAtivos()
         console.log(`Ativos: ${produtosAtivos}`)
+
         const produtosInativos = await this.getProdutosInativos()
         console.log(`Inativos: ${produtosInativos}`)
-        
+
         return {
             produtosAtivos, produtosInativos
         }
+        
     }
 
     async getProdutosAtivos() {
@@ -40,14 +42,22 @@ class ProdutosService {
         return  produtos
     }
 
-    async postAtualizaProduto(produtos){
-        const {codigo, situacao} = produtos
-        
-        const xml =  await ProdutosFactory.montaXmlProduto(situacao)
+    // ESTUDAR MEIO DE ATUALIZAR  SITUACAO VIA ARRAY
+    // async postAtualizaProduto(produtos){
+    //     let response = []
+ 
+    //     produtos.forEach(async (p) => {
+    //         response.push(await this.atualizaSituacao(p.situacao,p.codigo))
+    //     })
 
+    //     return response
+    // }
+
+    async atualizaSituacao(codigo, situacao){
         const data = new FormData()
+
         data.append('apikey', process.env.APIKEY)
-        data.append('xml', xml)
+        data.append('xml', `<?xml version="1.0" encoding="UTF-8"?><produto><situacao>${situacao}</situacao></produto>`)
 
         const rota = `${RotasExternas.urlAPI}/produto/${codigo}/json/`
         console.log(`ProdutosService - postAtualizaProduto: rota: ${rota}`)
@@ -56,8 +66,9 @@ class ProdutosService {
             headers: data.getHeaders()
         })
 
-        return response
-    } 
+        const produto = await ProdutosFactory.objetoProdutos(response.data.retorno.produtos)
+        return produto
+    }
 }
 
 export default new ProdutosService()

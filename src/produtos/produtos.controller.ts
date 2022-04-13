@@ -1,4 +1,4 @@
-import { Console } from 'console'
+import { Request, Response } from 'express'
 import * as HttpStatus from 'http-status'
 
 import Helper from '../utils/helper'
@@ -35,9 +35,10 @@ class ProdutosController {
         }
     }
 
-    async postAtualizaProduto(req, res){
+    async postAtualizaProduto(req: Request, res: Response){
+        const { codigo, situacao } = req.body
         try {
-            const result = await ProdutosService.postAtualizaProduto(req.body.produtos)
+            const result = await ProdutosService.atualizaSituacao(codigo, situacao)
             Helper.sendResponse(res, HttpStatus.OK, result)
         } catch (error) {
             console.log(error)

@@ -12,6 +12,8 @@ class App {
     constructor() {
         this.app = express()
 
+        this.middler()
+
         this.routes()
     }
 

@@ -5,7 +5,7 @@ import ProdutosController from './produtos.controller'
 const router = express.Router()
 
 router.route('/').get(ProdutosController.getProdutos)
-router.route('/situacao').post(ProdutosController.postAtualizaProduto)
+router.route('/situacao').put(ProdutosController.postAtualizaProduto)
 router.route('/ativos').get(ProdutosController.getProdutosAtivos)
 router.route('/inativos').get(ProdutosController.getProdutosInativos)
 
