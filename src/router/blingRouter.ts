@@ -6,6 +6,7 @@ const router = express.Router()
 router.get('/produtos', BlingController.getProdutos)
 router.post('/produtos', BlingController.postProduto)
 router.put('/produtos/situacao', BlingController.putAtivaInativaProduto)
+router.get('/produtos/inativos', BlingController.getProdutosInativos)
 
 router.get('/cliente/:id', BlingController.getCliente)
 

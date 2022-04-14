@@ -42,4 +42,10 @@ export default class BlingController {
 
         if(result) return res.status(200).json(result)
     }
+
+    static async getProdutosInativos(req: Request, res: Response): Promise<any> {
+        const result = await BlingService.getProdutosInativos()
+
+        if(result) return res.status(200).json(result)
+    }
 }

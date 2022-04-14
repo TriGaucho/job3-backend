@@ -109,7 +109,14 @@ export default class BlingService {
         return produto
     }
 
-    static async produtosInativos() {
+    static async getProdutosInativos() {
+        const rota = `${rotasBling.base}/produtos/json/?filters=situacao[I]&`
+        console.log(`ProdutosService - getProdutosInativos: rota: ${rota}`)
+
+        const response = await axios.get(`${rota}apikey=${process.env.APIKEY}`)
+        const produtos = await ProdutosFactory.objetoProdutos(response.data.retorno.produtos)
+        console.log(produtos)
         
+        return  produtos
     }
 }
