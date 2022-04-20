@@ -10,15 +10,63 @@ require('dotenv').config()
 import rotasBling from '../configs/rotasBling'
 
 export default class BlingService {
+    static async delay() {
+        return new Promise(resolve => setTimeout(resolve, 200))
+    }
+    
     static async getProdutos(filtro): Promise<any> {
         const situacao = filtro ? `filters=situacao[${filtro}]&` : ''
-      try{
-        const response = await axios.get(`${rotasBling.get.produtos}/?${situacao}apikey=${process.env.APIKEY}`)
-        console.log(`${rotasBling.get.produtos}/?apikey=${process.env.APIKEY}`)
-            return ProdutosFactory.objetoProdutos(response.data.retorno.produtos)
-        }catch{
-           throw {msd: 'erro'} 
-        }
+        let pagina = 1
+        let produtos = []
+        let response = null
+        do {
+            let rota = `${rotasBling.base}/produtos/page=${pagina}/json/`
+            console.log(`ProdutosService - getProdutos: rota: ${rota}`)
+            
+            await this.delay()
+            try {
+                response = await axios.get(`${rota}?apikey=${process.env.APIKEY}`)
+            } catch (error) {
+                console.log(error)
+            }
+
+            if (response.data.retorno.erros) {
+                pagina = 0
+            } else {
+                await ProdutosFactory.objetoProdutos(response.data.retorno.produtos, produtos)
+                console.log(produtos)
+                pagina++
+            }
+
+        } while (pagina != 0);
+        
+        console.log(produtos)
+        return produtos
+    }
+
+    static async getProdutosInativos() {
+        let pagina = 1
+        let produtos = []
+        
+        do {
+            let rota = `${rotasBling.base}/produtos/page=${pagina}/json/?filters=situacao[I]&`
+            console.log(`ProdutosService - getProdutosInativos: rota: ${rota}`)
+            
+            await this.delay()
+
+            let response = await axios.get(`${rota}apikey=${process.env.APIKEY}`)
+            if (response.data.retorno.erros) {
+                pagina = 0 
+            } else { 
+                await ProdutosFactory.objetoProdutos(response.data.retorno.produtos, produtos)
+                console.log(produtos)
+                pagina++
+            }
+        } while (pagina === 0);
+        
+        console.log(produtos)
+        
+        return  produtos
     }
 
     static async postProduto(xmlProduto) {
@@ -105,18 +153,9 @@ export default class BlingService {
         })
         console.log(response)
 
-        const produto = await ProdutosFactory.objetoProdutos(response.data.retorno.produtos)
+        const produto = await ProdutosFactory.objetoProdutos(response.data.retorno.produtos, null)
         return produto
     }
 
-    static async getProdutosInativos() {
-        const rota = `${rotasBling.base}/produtos/json/?filters=situacao[I]&`
-        console.log(`ProdutosService - getProdutosInativos: rota: ${rota}`)
 
-        const response = await axios.get(`${rota}apikey=${process.env.APIKEY}`)
-        const produtos = await ProdutosFactory.objetoProdutos(response.data.retorno.produtos)
-        console.log(produtos)
-        
-        return  produtos
-    }
-}
+} 

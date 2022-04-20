@@ -1,7 +1,7 @@
 export default class ProdutosFactory {
-    static async objetoProdutos(prod): Promise<any> {
-        const produtos = []
-        prod.forEach(i => {
+    static async objetoProdutos(response, produtos): Promise<any> {     
+        !produtos ? produtos = [] : produtos 
+        response.forEach(i => {
              produtos.push({
                 id: i.produto.id,
                 codigo: i.produto.codigo,
