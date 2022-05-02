@@ -19,6 +19,7 @@ export default class PedidosFactory{
                 celularCliente: p.pedido.cliente.celular,
                 emailCliente: p.pedido.cliente.email,
                 numeroCliente: p.pedido.cliente.numero,
+                previsaoPedido: p.pedido.dataPrevista || 0,
             })
         })
 

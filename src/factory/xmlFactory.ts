@@ -34,6 +34,7 @@ export default class XmlFactroy {
         ${item}
         </itens>
         <obs>${obj.obs}</obs>
+        <data_prevista>${obj.previsaoPedido}<data_prevista>
         <obs_internas>${obj.obs_internas}</obs_internas>
         </pedido>
         `
